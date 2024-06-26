@@ -5,7 +5,6 @@ import { Barbershop } from "@prisma/client";
 import { StarIcon } from "lucide-react";
 import Image from "next/image";
 
-
 type BarbershopItemProps = {
   barbershop: Barbershop
 }
