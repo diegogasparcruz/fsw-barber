@@ -4,12 +4,14 @@ import { Search } from "./components/search";
 import { BookingItem } from "@/components/shared/booking-item";
 import { db } from "@/lib/prisma";
 import { BarbershopItem } from "./components/barbershop-item";
+import { Header } from "@/components/core/header";
 
 export default async function Home() {
   const barbershops = await db.barbershop.findMany({})
 
   return (
     <div>
+      <Header />
       <header className="px-5 pt-5">
         <h2 className="text-xl font-bold">Olá, Diego!</h2>
         <p className="capitalize text-sm">
