@@ -2,9 +2,9 @@ import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { Search } from "./components/search";
 import { BookingItem } from "@/components/shared/booking-item";
-import { db } from "@/lib/prisma";
 import { BarbershopItem } from "./components/barbershop-item";
 import { Header } from "@/components/core/header";
+import { db } from "@/lib/prisma";
 
 export default async function Home() {
   const barbershops = await db.barbershop.findMany({})
