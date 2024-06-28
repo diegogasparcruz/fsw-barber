@@ -3,7 +3,7 @@ import { Avatar, AvatarImage } from "../ui/avatar";
 import { LogOutIcon, UserIcon, LogInIcon, HomeIcon, CalendarIcon } from "lucide-react";
 import { Button } from "../ui/button";
 import { SheetHeader, SheetTitle } from "../ui/sheet";
-import { useSession, signIn } from "next-auth/react";
+import { useSession, signIn, signOut } from "next-auth/react";
 import Link from "next/link";
 
 type SideMenuProps = {
@@ -13,13 +13,11 @@ export const SideMenu = ({ }: SideMenuProps) => {
   const { data: session } = useSession();
 
   const handleLoginClick = async () => {
-    const response = await signIn('google')
-    console.log(response);
+    await signIn('google')
   }
   
   const handleLogoutClick = async () => {
-    const response = await signIn('google')
-    console.log(response);
+    await signOut()
   }
   
   return (

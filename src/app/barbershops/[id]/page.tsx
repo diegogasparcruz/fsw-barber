@@ -4,12 +4,16 @@ import { ChevronLeftIcon, MapPinIcon, MapPinOffIcon, MapPinnedIcon, MenuIcon, St
 import Image from "next/image";
 import { BarbershopInfo } from "./components/barbershop-info";
 import { ServiceItem } from "./components/service-item";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 type BarbershopDetailsProps = {
   params: { id: string }
 }
 
 const BarbershopDetails = async ({ params }: BarbershopDetailsProps) => {
+  const session = await getServerSession(authOptions)
+
   if (!params.id) {
     // TODO: redirecionar para homepage
     return null
@@ -35,7 +39,11 @@ const BarbershopDetails = async ({ params }: BarbershopDetailsProps) => {
 
     <div className="px-5 pt-6 flex flex-col gap-4">
       {barbershop.services.map(service => (
-        <ServiceItem key={service.id} service={service} />
+        <ServiceItem 
+          key={service.id} 
+          service={service} 
+          isAuthenticated={!!session?.user} 
+        />
       ))}
     </div>
    </div>
