@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/core/header";
 import { Footer } from "@/components/core/footer";
 import AuthProvider from "@/providers/auth";
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,6 +23,7 @@ export default function RootLayout({
       <body className={`${inter.className} dark`}>
         <AuthProvider>
           {children}
+          <Toaster />
           <Footer />
         </AuthProvider>
       </body>
