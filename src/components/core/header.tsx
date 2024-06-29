@@ -19,12 +19,14 @@ export const Header = ({ }: HeaderProps) => {
   return (
     <Card>
       <CardContent className="p-5 flex justify-between items-center">
-        <Image
-          src="/images/svg/logo.svg"
-          alt="FSW Barber"
-          width={120}
-          height={22}
-        />
+        <Link href="/">
+          <Image
+            src="/images/svg/logo.svg"
+            alt="FSW Barber"
+            width={120}
+            height={22}
+          />
+        </Link>
 
         <Sheet>
           <SheetTrigger asChild>
