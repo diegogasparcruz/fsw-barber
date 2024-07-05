@@ -10,12 +10,7 @@ import { AvatarImage } from "@radix-ui/react-avatar";
 import Link from "next/link";
 import { SideMenu } from "./side-menu";
 
-type HeaderProps = {
-
-}
-export const Header = ({ }: HeaderProps) => {
-  
-
+export const Header = () => {
   return (
     <Card>
       <CardContent className="p-5 flex justify-between items-center">
@@ -43,5 +38,3 @@ export const Header = ({ }: HeaderProps) => {
     </Card>
   );
 }
-
-12721174707923
