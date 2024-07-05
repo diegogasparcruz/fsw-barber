@@ -7,7 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Sheet, SheetContent, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { generateDayTimeList } from "@/helpers/generate-day-time-list";
 import { Barbershop, Booking, Service } from "@prisma/client";
-import { format, setHours, setMinutes } from "date-fns";
+import { addDays, format, setHours, setMinutes } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { Loader2Icon } from "lucide-react";
 import { signIn, useSession } from "next-auth/react";
@@ -170,7 +170,7 @@ export const ServiceItem = ({ service, barbershop, isAuthenticated }: ServiceIte
                     selected={date}
                     onSelect={handleDateClick}
                     locale={ptBR}
-                    fromDate={new Date()}
+                    fromDate={addDays(new Date(), 1)}
                     styles={{
                       head_cell: {
                         width: '100%',
