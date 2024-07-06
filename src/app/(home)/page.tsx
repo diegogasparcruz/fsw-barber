@@ -11,8 +11,13 @@ import { SearchForm } from "@/components/shared/search-form";
 export default async function Home() {
   const session = await getServerSession(authOptions)
 
-  const [barbershops, confirmedBookings] = await Promise.all([
+  const [barbershops, recommendedBarbershops, confirmedBookings] = await Promise.all([
     await db.barbershop.findMany({}),
+    await db.barbershop.findMany({
+      orderBy: {
+        id: 'asc'
+      }
+    }),
     session?.user ?
       await db.booking.findMany({
         where: {
@@ -68,7 +73,7 @@ export default async function Home() {
         </h2>
 
         <div className="flex gap-4 overflow-x-auto [&::-webkit-scrollbar]:hidden px-5">
-          {barbershops.map((barbershop => (
+          {recommendedBarbershops.map((barbershop => (
             <div key={barbershop.id} className="min-w-[167px]">
               <BarbershopItem barbershop={barbershop} />
             </div>
