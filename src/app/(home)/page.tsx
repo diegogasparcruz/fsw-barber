@@ -1,12 +1,12 @@
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
-import { Search } from "./components/search";
 import { BookingItem } from "@/components/shared/booking-item";
 import { BarbershopItem } from "./components/barbershop-item";
 import { Header } from "@/components/core/header";
 import { db } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth-options";
+import { SearchForm } from "@/components/shared/search-form";
 
 export default async function Home() {
   const session = await getServerSession(authOptions)
@@ -45,7 +45,7 @@ export default async function Home() {
       </header>
 
       <div className="px-5 mt-6">
-        <Search />
+        <SearchForm />
       </div>
 
       {confirmedBookings.length > 0 && (
@@ -69,7 +69,9 @@ export default async function Home() {
 
         <div className="flex gap-4 overflow-x-auto [&::-webkit-scrollbar]:hidden px-5">
           {barbershops.map((barbershop => (
-            <BarbershopItem key={barbershop.id} barbershop={barbershop} />
+            <div key={barbershop.id} className="min-w-[167px]">
+              <BarbershopItem barbershop={barbershop} />
+            </div>
           )))}
         </div>
       </div>
@@ -81,7 +83,9 @@ export default async function Home() {
 
         <div className="flex gap-4 overflow-x-auto [&::-webkit-scrollbar]:hidden px-5">
           {barbershops.map((barbershop => (
-            <BarbershopItem key={barbershop.id} barbershop={barbershop} />
+            <div key={barbershop.id} className="min-w-[167px]">
+              <BarbershopItem barbershop={barbershop} />
+            </div>
           )))}
         </div>
       </div>
