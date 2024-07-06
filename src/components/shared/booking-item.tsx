@@ -90,6 +90,7 @@ export const BookingItem = ({ booking }: BookingItemProps) => {
             <Image
               src="/images/png/barbershop-map.png"
               fill
+              sizes="(max-width: 600px) 100vw, (max-width: 1200px) 100vw, 100vw"
               alt={booking.barbershop.name}
             />
 

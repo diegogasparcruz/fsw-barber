@@ -34,66 +34,68 @@ export default async function Home() {
   ])
 
   return (
-    <div>
+    <>
       <Header />
-      <header className="px-5 pt-5">
-        <h2 className="text-xl font-bold">
-          {session?.user 
-            ? `Olá, ${session.user.name?.split(' ')[0]}!` 
-            : 'Olá! Vamos agendar um corte hoje?'}
-        </h2>
-        <p className="capitalize text-sm">
-          {format(new Date(), "EEEE, d 'de' MMMM", {
-            locale: ptBR
-          })}
-        </p>
-      </header>
+      <div className="lg:px-32">
+        <header className="px-5 pt-5">
+          <h2 className="text-xl font-bold">
+            {session?.user
+              ? `Olá, ${session.user.name?.split(' ')[0]}!`
+              : 'Olá! Vamos agendar um corte hoje?'}
+          </h2>
+          <p className="capitalize text-sm">
+            {format(new Date(), "EEEE, d 'de' MMMM", {
+              locale: ptBR
+            })}
+          </p>
+        </header>
 
-      <div className="px-5 mt-6">
-        <SearchForm />
-      </div>
+        <div className="px-5 mt-6">
+          <SearchForm />
+        </div>
 
-      {confirmedBookings.length > 0 && (
+        {confirmedBookings.length > 0 && (
+          <div className="mt-6">
+            <h2 className="pl-5 uppercase text-xs text-gray-400 font-bold mb-3">
+              Agendamentos
+            </h2>
+
+            <div className="px-5 flex gap-3 overflow-x-auto [&::-webkit-scrollbar]:hidden">
+              {confirmedBookings.map(booking => (
+                <BookingItem key={booking.id} booking={booking} />
+              ))}
+            </div>
+          </div>
+        )}
+
         <div className="mt-6">
-          <h2 className="pl-5 uppercase text-xs text-gray-400 font-bold mb-3">
-            Agendamentos
+          <h2 className="px-5 uppercase text-xs text-gray-400 font-bold mb-3">
+            Recomendados
           </h2>
 
-          <div className="px-5 flex gap-3 overflow-x-auto [&::-webkit-scrollbar]:hidden">
-            {confirmedBookings.map(booking => (
-              <BookingItem key={booking.id} booking={booking} />
-            ))}
+          <div className="flex gap-4 overflow-x-auto [&::-webkit-scrollbar]:hidden px-5">
+            {recommendedBarbershops.map((barbershop => (
+              <div key={barbershop.id} className="min-w-[167px]">
+                <BarbershopItem barbershop={barbershop} />
+              </div>
+            )))}
           </div>
         </div>
-      )}
 
-      <div className="mt-6">
-        <h2 className="px-5 uppercase text-xs text-gray-400 font-bold mb-3">
-          Recomendados
-        </h2>
+        <div className="mt-6 mb-[4.5rem]">
+          <h2 className="px-5 uppercase text-xs text-gray-400 font-bold mb-3">
+            Populares
+          </h2>
 
-        <div className="flex gap-4 overflow-x-auto [&::-webkit-scrollbar]:hidden px-5">
-          {recommendedBarbershops.map((barbershop => (
-            <div key={barbershop.id} className="min-w-[167px]">
-              <BarbershopItem barbershop={barbershop} />
-            </div>
-          )))}
+          <div className="flex gap-4 overflow-x-auto [&::-webkit-scrollbar]:hidden px-5">
+            {barbershops.map((barbershop => (
+              <div key={barbershop.id} className="min-w-[167px]">
+                <BarbershopItem barbershop={barbershop} />
+              </div>
+            )))}
+          </div>
         </div>
       </div>
-
-      <div className="mt-6 mb-[4.5rem]">
-        <h2 className="px-5 uppercase text-xs text-gray-400 font-bold mb-3">
-          Populares
-        </h2>
-
-        <div className="flex gap-4 overflow-x-auto [&::-webkit-scrollbar]:hidden px-5">
-          {barbershops.map((barbershop => (
-            <div key={barbershop.id} className="min-w-[167px]">
-              <BarbershopItem barbershop={barbershop} />
-            </div>
-          )))}
-        </div>
-      </div>
-    </div>
+    </>
   );
 }

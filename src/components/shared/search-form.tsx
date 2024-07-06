@@ -35,7 +35,7 @@ export const SearchForm = ({defaultValues}: SearchFormProps) => {
   }
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2 lg:w-full">
       <Form {...form}>
         <form className="flex w-full gap-4" onSubmit={form.handleSubmit(handleSubmit)}>
           <FormField
