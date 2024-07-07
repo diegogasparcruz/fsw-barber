@@ -1,4 +1,5 @@
 'use client'
+import { Header } from "@/components/core/header";
 import { SideMenu } from "@/components/core/side-menu";
 import { Button } from "@/components/ui/button";
 import { SheetTrigger, SheetContent, Sheet } from "@/components/ui/sheet";
@@ -18,8 +19,8 @@ export const BarbershopInfo = ({ barbershop }: BarbershopInfoProps) => {
   }
 
   return (
-    <div>
-      <div className="h-[250px] w-full relative">
+    <div className="">
+      <div className="h-[250px] w-full relative lg:hidden">
         <Button
           className="z-50 absolute top-4 left-4"
           size="icon"
@@ -57,15 +58,30 @@ export const BarbershopInfo = ({ barbershop }: BarbershopInfoProps) => {
         />
       </div>
 
-      <div className="px-5 pt-3 pb-6 border-b border-solid border-secondary">
-        <h1 className="text-xl font-bold">{barbershop.name}</h1>
 
-        <div className="flex items-center gap-1 mt-2">
-          <MapPinIcon className="stroke-primary" size={18} />
-          <p className="text-sm">{barbershop.address}</p>
+      <div className="hidden lg:block relative min-h-[480px] max-h-[480px] w-full">
+        <Image
+          className="rounded-lg"
+          src={barbershop.imageUrl}
+          fill
+          style={{
+            objectFit: 'cover'
+          }}
+          alt={barbershop.name}
+        />
+      </div>
+
+      <div className="flex flex-col gap-2 lg:flex-row lg:justify-between lg:items-start px-5 pt-3 lg:px-0 pb-6 border-b border-solid border-secondary">
+        <div className="flex flex-col gap-2">
+          <h1 className="text-xl lg:text-3xl font-bold">{barbershop.name}</h1>
+
+          <div className="flex items-center gap-1">
+            <MapPinIcon className="stroke-primary" size={18} />
+            <p className="text-sm">{barbershop.address}</p>
+          </div>
         </div>
 
-        <div className="flex items-center gap-1 mt-2">
+        <div className="flex items-center gap-1">
           <StarIcon className="stroke-primary" size={18} />
           <p className="text-sm">5,0 (899 avaliações)</p>
         </div>

@@ -5,7 +5,7 @@ import { BookingInfo } from "@/components/shared/booking-info";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Card, CardContent } from "@/components/ui/card";
-import { Sheet, SheetContent, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetClose, SheetContent, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { generateDayTimeList } from "@/helpers/generate-day-time-list";
 import { Barbershop, Booking, Service } from "@prisma/client";
 import { addDays, format, setHours, setMinutes } from "date-fns";
@@ -25,8 +25,8 @@ type ServiceItemProps = {
 
 export const ServiceItem = ({ service, barbershop, isAuthenticated }: ServiceItemProps) => {
   const router = useRouter()
-  const {data: session} = useSession()
-  
+  const { data: session } = useSession()
+
   const [date, setDate] = useState<Date | undefined>(undefined)
   const [dayBookings, setDayBookings] = useState<Booking[]>([])
   const [hour, setHour] = useState<String | undefined>(undefined)
@@ -52,8 +52,8 @@ export const ServiceItem = ({ service, barbershop, isAuthenticated }: ServiceIte
     setIsSubmitLoading(true)
 
     try {
-      if(!hour || !date || !session?.user) {
-        return 
+      if (!hour || !date || !session?.user) {
+        return
       }
 
       const dateHour = Number(hour.split(':')[0])
@@ -73,14 +73,14 @@ export const ServiceItem = ({ service, barbershop, isAuthenticated }: ServiceIte
       setDate(undefined)
 
       toast("Reserva realizada com sucesso", {
-        description: format(newDate, 
+        description: format(newDate,
           "'Para' dd 'de' MMMM 'às' HH':'mm'.'",
-          {locale: ptBR}
+          { locale: ptBR }
         ),
         action: {
           label: 'Visualizar',
           onClick: () => router.push('/bookings')
-          
+
         }
       })
     } catch (error) {
@@ -91,7 +91,7 @@ export const ServiceItem = ({ service, barbershop, isAuthenticated }: ServiceIte
   }
 
   const timeList = useMemo(() => {
-    if(!date) return []
+    if (!date) return []
 
     return generateDayTimeList(date).filter(time => {
       const timeHour = Number(time.split(':')[0])
@@ -104,15 +104,15 @@ export const ServiceItem = ({ service, barbershop, isAuthenticated }: ServiceIte
         return bookingHour === timeHour && bookingMinutes === timeMinutes
       })
 
-      if(!booking) return true
+      if (!booking) return true
 
       return false
     })
   }, [date, dayBookings])
 
-  useEffect(()=>{
+  useEffect(() => {
     const refreshAvailableHours = async () => {
-      if(date) {
+      if (date) {
         const response = await getDayBookings(barbershop.id, date)
         setDayBookings(response)
       }
@@ -213,7 +213,7 @@ export const ServiceItem = ({ service, barbershop, isAuthenticated }: ServiceIte
                   )}
 
                   <div className="py-6 px-5 border-t border-solid border-secondary">
-                    <BookingInfo 
+                    <BookingInfo
                       barbershop={barbershop}
                       service={service}
                       date={date}
@@ -222,7 +222,13 @@ export const ServiceItem = ({ service, barbershop, isAuthenticated }: ServiceIte
                   </div>
 
                   <SheetFooter className="px-5">
-                    <Button 
+                    <SheetClose asChild>
+                      <Button className="w-full" variant="secondary">
+                        Voltar
+                      </Button>
+                    </SheetClose>
+                    
+                    <Button
                       onClick={handleBookingSubmit}
                       disabled={!hour || !date || isSubmitLoading}
                     >

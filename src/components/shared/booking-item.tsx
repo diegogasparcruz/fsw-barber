@@ -16,6 +16,7 @@ import { Loader2Icon } from "lucide-react";
 import { Input } from "postcss";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "../ui/alert-dialog";
 import { BookingInfo } from "./booking-info";
+import { cn } from "@/lib/utils";
 
 type BookingItemProps = {
   booking: Prisma.BookingGetPayload<{
@@ -24,9 +25,10 @@ type BookingItemProps = {
       barbershop: true
     }
   }>
+  cardClassName?: string
 }
 
-export const BookingItem = ({ booking }: BookingItemProps) => {
+export const BookingItem = ({ booking, cardClassName }: BookingItemProps) => {
   const [isDeleteLoading, setIsDeleteLoading] = useState(false)
 
   const isBookingConfirmed = isFuture(booking.date)
@@ -48,7 +50,7 @@ export const BookingItem = ({ booking }: BookingItemProps) => {
   return (
     <Sheet>
       <SheetTrigger>
-        <Card className="min-w-[420px] max-w-[420px]">
+        <Card className={cn("max-w-[420px]", cardClassName)}>
           <CardContent className="flex p-0">
             <div className="flex flex-col gap-2 py-5 pl-5 flex-[3]">
               <Badge

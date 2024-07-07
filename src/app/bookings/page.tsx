@@ -6,6 +6,9 @@ import { db } from "@/lib/prisma";
 import { BookingItem } from "@/components/shared/booking-item";
 import { isFuture, isPast } from "date-fns";
 import { authOptions } from "@/lib/auth-options";
+import { ArrowLeftIcon, } from "lucide-react";
+import Link from "next/link";
+import { Separator } from "@/components/ui/separator";
 
 const BookingsPage = async () => {
   const session = await getServerSession(authOptions)
@@ -51,8 +54,16 @@ const BookingsPage = async () => {
     <>
       <Header />
 
-      <div className="px-5 py-6">
-        <h1 className="text-xl font-bold">Agendamentos</h1>
+      <div className="px-5 py-6 lg:px-20">
+        <div className="flex items-center gap-2">
+          <Link href="/" className="hidden w-fit lg:flex gap-2 hover:text-primary">
+            <ArrowLeftIcon /> Voltar
+          </Link>
+          <Separator orientation="vertical" className="h-[20px]" />
+          <h1 className="text-xl font-bold">
+            Agendamentos
+          </h1>
+        </div>
 
         {confirmedBookings.length > 0 && (
           <>
@@ -60,7 +71,7 @@ const BookingsPage = async () => {
               Confirmados
             </h2>
 
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-3 md:grid md:grid-cols-[repeat(auto-fit,minmax(300px,1fr))]">
               {confirmedBookings.map(booking =>
                 <BookingItem key={booking.id} booking={booking} />
               )}
@@ -74,7 +85,7 @@ const BookingsPage = async () => {
               Finalizados
             </h2>
 
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-3 md:grid md:grid-cols-[repeat(auto-fit,minmax(300px,1fr))]">
               {finishedBookings.map(booking =>
                 <BookingItem key={booking.id} booking={booking} />
               )}

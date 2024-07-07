@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { Card, CardContent } from "../ui/card"
 import { Button } from "../ui/button";
-import { CalendarDaysIcon, CalendarIcon, HomeIcon, LogInIcon, LogOutIcon, MenuIcon, UserIcon } from "lucide-react";
+import { CalendarDaysIcon, CalendarIcon, HomeIcon, Loader2Icon, LogInIcon, LogOutIcon, MenuIcon, UserIcon } from "lucide-react";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "../ui/sheet";
 import { Avatar } from "../ui/avatar";
@@ -10,6 +10,7 @@ import { AvatarImage } from "@radix-ui/react-avatar";
 import Link from "next/link";
 import { SideMenu } from "./side-menu";
 import { SearchForm } from "../shared/search-form";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "../ui/alert-dialog";
 
 export const Header = () => {
   const { data: session } = useSession()
@@ -23,7 +24,7 @@ export const Header = () => {
   }
 
   return (
-    <Card className="lg:px-32">
+    <Card className="lg:px-20">
       <CardContent className="p-5 lg:px-0 flex justify-between items-center">
         <Link href="/">
           <Image
@@ -47,8 +48,6 @@ export const Header = () => {
         </Sheet>
 
         <div className="gap-4 hidden lg:flex lg:items-center lg:gap-6">
-
-
           {session?.user ? (
             <>
               <Link href="bookings" className="flex gap-2 text-sm items-center">
@@ -65,9 +64,35 @@ export const Header = () => {
                   <h2 className="font-bold text-base">{session?.user?.name}</h2>
                 </div>
 
-                <Button className="w-8 h-8" variant="secondary" size="icon" onClick={handleLogoutClick}>
+                
+
+                <AlertDialog>
+                <AlertDialogTrigger asChild>
+                <Button className="w-8 h-8" variant="secondary" size="icon">
                   <LogOutIcon size={16} />
                 </Button>
+                </AlertDialogTrigger>
+
+                <AlertDialogContent className="w-[90%]">
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>Deseja fazer logout?</AlertDialogTitle>
+                  </AlertDialogHeader>
+                  
+                  <AlertDialogFooter className="flex-row gap-3">
+                    <AlertDialogCancel 
+                      className="w-full mt-0"
+                    >
+                      Voltar
+                    </AlertDialogCancel>
+                    <AlertDialogAction 
+                      className="w-full"
+                      onClick={handleLogoutClick}
+                    >
+                      Confirmar
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
               </div>
             </>
           ) : (
