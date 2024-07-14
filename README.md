@@ -11,14 +11,12 @@ FSW Barber's main objective is to facilitate the scheduling of beard and hair se
 ## 🖥 Tecnologies
 
 <div>
-  <a href="#-tecnologias-utilizadas">
       <img alt="React" src="https://img.shields.io/badge/next.js%20-%2320232a.svg?&style=for-the-badge&logo=next&logoColor=%2361DAFB" />
       <img alt="TypeScript" src="https://img.shields.io/badge/typescript%20-%23007ACC.svg?&style=for-the-badge&logo=typescript&logoColor=white" />
       <img alt="Tailwind css" src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" />
       <img alt="Prisma" src="https://img.shields.io/badge/prisma-1B222D?style=for-the-badge&logo=prisma&logoColor=white" />
       <img alt="Postgresql css" src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white" />
       
-   </a>
 </div>
 
 This project was developed using cutting edge front-end technologies.
