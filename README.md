@@ -25,7 +25,7 @@ This project was developed using cutting edge front-end technologies.
 - [Typescript](https://www.typescriptlang.org/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Prisma](https://www.prisma.io/)
-- [Postgrsql](https://www.postgresql.org/)
+- [Postgresql](https://www.postgresql.org/)
 
 ## 🚀 Getting started
 
